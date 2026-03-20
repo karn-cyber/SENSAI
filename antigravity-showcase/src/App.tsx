@@ -3,6 +3,9 @@ import { SequenceCanvas } from './components/SequenceCanvas';
 import { HeroSection } from './components/HeroSection';
 import { ExplodedSection } from './components/ExplodedSection';
 import { AssemblySection } from './components/AssemblySection';
+import { StorySection } from './components/StorySection';
+import { OrderSection } from './components/OrderSection';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -21,6 +24,12 @@ function App() {
 
       <ExplodedSection />
       <AssemblySection />
+      
+      {/* Story Mode takes over normal scroll document flow */}
+      <StorySection />
+      
+      <OrderSection />
+      <Footer />
     </main>
   )
 }

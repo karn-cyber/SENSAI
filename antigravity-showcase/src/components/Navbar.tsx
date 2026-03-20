@@ -6,7 +6,7 @@ export const Navbar = () => {
           <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
             <div className="w-2 h-2 rounded-full bg-black"></div>
           </div>
-          <span className="font-semibold text-lg tracking-wider">ANTIGRAVITY</span>
+          <span className="font-semibold text-lg tracking-wider">SENS.ai</span>
         </div>
         
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-400">
@@ -16,9 +16,9 @@ export const Navbar = () => {
         </div>
 
         <div>
-          <button className="bg-white text-black px-5 py-2 rounded-full text-xs uppercase tracking-wider font-semibold hover:bg-gray-200 transition-colors">
+          <a href="#order" className="inline-block bg-white text-black px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold hover:bg-gray-200 transition-colors">
             Order Yours
-          </button>
+          </a>
         </div>
       </div>
     </nav>

@@ -28,9 +28,9 @@ export const AssemblySection = () => {
           <p className="text-gray-400 text-sm mb-10 leading-relaxed font-light">
             Components magnetically pulling together toward a central axis. High-tension energy, perfectly aligned for final assembly. Sensai is ready to guide you.
           </p>
-          <button className="w-full bg-white text-black font-semibold text-sm tracking-widest uppercase py-5 rounded-xl hover:bg-gray-200 transition-all active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+          <a href="#order" className="w-full inline-block bg-white text-black font-semibold text-sm tracking-widest uppercase py-5 rounded-xl hover:bg-gray-200 transition-all active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.2)]">
             Order Yours
-          </button>
+          </a>
         </div>
       </div>
     </div>
