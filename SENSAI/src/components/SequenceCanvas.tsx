@@ -15,14 +15,34 @@ const getFrameUrl = (index: number) => {
 
 export const SequenceCanvas = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
 
   useEffect(() => {
-    // Silently preload in background so we don't block the UI
-    for (let i = 1; i < FRAME_COUNT; i++) {
+    // Array to hold preloaded images to prevent garbage collection
+    const images: HTMLImageElement[] = [];
+
+    for (let i = 0; i < FRAME_COUNT; i++) {
         const img = new Image();
         img.src = getFrameUrl(i);
+        images.push(img);
+        
+        // Initial setup on the first frame to size the canvas
+        if (i === 0) {
+            img.onload = () => {
+                if (canvasRef.current) {
+                    const canvas = canvasRef.current;
+                    const ctx = canvas.getContext('2d');
+                    // Match the intrinsic size of the frame
+                    canvas.width = img.naturalWidth || img.width;
+                    canvas.height = img.naturalHeight || img.height;
+                    ctx?.drawImage(img, 0, 0);
+                }
+            };
+        }
     }
+    
+    imagesRef.current = images;
 
     const frameSequence = { frame: 0 };
     
@@ -36,8 +56,22 @@ export const SequenceCanvas = () => {
             snap: "frame",
             ease: "none",
             onUpdate: () => {
-                if (imgRef.current) {
-                    imgRef.current.src = getFrameUrl(Math.round(frameSequence.frame));
+                if (canvasRef.current && imagesRef.current.length > 0) {
+                    const ctx = canvasRef.current.getContext('2d');
+                    const img = imagesRef.current[Math.round(frameSequence.frame)];
+                    
+                    // Proceed only if the frame is fully loaded and decodeable
+                    if (img && img.complete && img.naturalHeight !== 0) {
+                         // Fallback resize if first image onload was skipped/late or dimensions don't match
+                         if (canvasRef.current.width !== img.naturalWidth && img.naturalWidth > 0) {
+                             canvasRef.current.width = img.naturalWidth;
+                             canvasRef.current.height = img.naturalHeight;
+                         }
+                         
+                         if (canvasRef.current.width > 0) {
+                             ctx?.drawImage(img, 0, 0);
+                         }
+                    }
                 }
             }
         })
@@ -50,14 +84,23 @@ export const SequenceCanvas = () => {
 
   return (
     <div ref={containerRef} className="fixed top-0 left-0 w-full h-full z-0 bg-black flex items-center justify-center overflow-hidden pointer-events-none">
-        {/* Render instantly without JS blocking */}
+        
+        {/* Placeholder image that renders instantly without blocking JS parsing */}
         <img 
-          ref={imgRef}
           src={getFrameUrl(0)}
           alt="SENSAI Product Overview"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           style={{ 
-            filter: 'contrast(1.1) brightness(0.95)' // Slight adjustment for deep matte black integration
+            filter: 'contrast(1.1) brightness(0.95)' 
+          }}
+        />
+        
+        {/* Hardware-accelerated canvas for smooth high-framerate sequence scrubbing */}
+        <canvas 
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          style={{ 
+            filter: 'contrast(1.1) brightness(0.95)'
           }}
         />
     </div>
