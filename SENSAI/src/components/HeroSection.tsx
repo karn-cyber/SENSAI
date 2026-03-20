@@ -11,7 +11,7 @@ export const HeroSection = () => {
       opacity: 0,
       y: -100,
       scrollTrigger: {
-        trigger: document.body,
+        trigger: "#sequence-spacer",
         start: "top top",
         end: "10% top",
         scrub: true,

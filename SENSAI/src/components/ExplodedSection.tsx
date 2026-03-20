@@ -11,7 +11,7 @@ export const ExplodedSection = () => {
         opacity: 1,
         scale: 1,
         scrollTrigger: {
-          trigger: document.body,
+          trigger: "#sequence-spacer",
           start: "25% top", 
           end: "45% top",
           scrub: true,
@@ -23,7 +23,7 @@ export const ExplodedSection = () => {
       opacity: 0,
       scale: 1.05,
       scrollTrigger: {
-        trigger: document.body,
+        trigger: "#sequence-spacer",
         start: "60% top",
         end: "80% top",
         scrub: true,

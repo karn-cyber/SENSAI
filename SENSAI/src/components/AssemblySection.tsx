@@ -11,7 +11,7 @@ export const AssemblySection = () => {
         opacity: 1,
         y: 0,
         scrollTrigger: {
-          trigger: document.body,
+          trigger: "#sequence-spacer",
           start: "85% top", 
           end: "bottom bottom",
           scrub: true,

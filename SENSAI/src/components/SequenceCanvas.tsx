@@ -47,7 +47,7 @@ export const SequenceCanvas = () => {
     const frameSequence = { frame: 0 };
     
     const scrollTrigger = ScrollTrigger.create({
-        trigger: document.body,
+        trigger: "#sequence-spacer",
         start: "top top",
         end: "bottom bottom",
         scrub: 0.5, // 0.5 sec drag effect for story mode

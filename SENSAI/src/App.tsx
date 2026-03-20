@@ -16,9 +16,9 @@ function App() {
       <SequenceCanvas />
 
       {/* The scrollable space for the story-mode scrubbing. 
-          600vh height gives enough space to smoothly scroll 40 frames. 
+          1000vh height gives enough space to smoothly scrub all 178 frames. 
       */}
-      <div style={{ height: '600vh', position: 'relative', zIndex: 10 }}>
+      <div id="sequence-spacer" style={{ height: '1000vh', position: 'relative', zIndex: 10 }}>
         <HeroSection />
       </div>
 
